@@ -12,7 +12,7 @@ export class BlogHttpService {
   public allBlogs;
   //public BaseUrl = 'https://blogapp.edwisor.com/api/v1/blogs';
   //public authToken = '?authToken=NmFmOGYxNzhiMjlmNmRkYTA5N2U1NDRkNTI2Mjk1ZDc0MDc2OTEwZTdjMzNjM2UxZDAxMWE3OTM4ZGZkYmE4ZjQ4Mjk0NzdhY2YzN2Q3NzU2N2RiNTI3OTBjMGExNDI3YjM2ZDI2ODZhMmI0YjBiZTUyY2FjNDliYTAxOGJmOThmOA==';
-public BaseUrl = 'https://localhost:3000';
+public BaseUrl = 'http://localhost:3000';
 
   constructor(private _http: HttpClient) {
     console.log("BHTTPS called");

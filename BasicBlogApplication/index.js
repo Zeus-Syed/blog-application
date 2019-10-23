@@ -3,26 +3,31 @@ const app = express();
 const fs = require('fs')
 const http = require('http')
 const cors = require('cors');
+
 const mongoose = require('mongoose')
 const appConfig = require('./config/config');
 mongoose.set('useCreateIndex',true)
 const bodyParser = require('body-parser');
 const errorHandler = require('./middlewares/appErrorHandler');
-const routeLoggerMiddleware = require("./middlewares/routeLogger")
+const routeLoggerMiddleware = require("./middlewares/routeLogger");
+
 //const cookieParser = require('cookie-parser');
-const blogRoute = require('./routes/blog');
-app.use('/',blogRoute);
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false}))
 app.use(cors());
+app.use(routeLoggerMiddleware.routeLogger);
+//const blogRoute = require('./routes/blog');
+//app.use('/',blogRoute);
+
 const helmet = require('helmet')
 const logger = require('./libs/loggerLib')
 
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false}))
+
 //app.use(cookieParser())
 
 app.use(errorHandler.globalErrorHandler)
-app.use(routeLoggerMiddleware.routeLogger);
+
 app.use(helmet())
 let routesPath = './routes'
 
@@ -34,14 +39,14 @@ fs.readdirSync(modelsPath).forEach(function(file){
 })
 
 
-/*fs.readdirSync(routesPath).forEach(function(file){
+fs.readdirSync(routesPath).forEach(function(file){
     if(~file.indexOf('.js')){
         console.log(routesPath +'/'+file)
         let route = require(routesPath +'/'+file)
         //app.use('/',route.setRouter);
         route.setRouter(app);
     }
-})*/
+})
 
 app.use(errorHandler.notFoundHandler)
 

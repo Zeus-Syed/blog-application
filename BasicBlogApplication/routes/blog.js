@@ -5,7 +5,7 @@ const  example = require("./../middlewares/example")
 const auth = require('./../middlewares/auth')
 const blogRouter = express.Router();
 
-//let setRouter = (app) =>{
+let setRouter = (app) =>{
 //let helo = (req, res) => res.send("heloo world");
 //let exap = (req,res) => res.send("exampleeeee ths is");
 
@@ -14,7 +14,8 @@ const blogRouter = express.Router();
    // let baseUrl = apiConfig.apiVersion+'/blogs';
 
       // app.get(baseUrl+'/all',auth.isAuthenticated, blogController.getAllBlog);
-	   blogRouter.get('/all', blogController.getAllBlog);
+	  // blogRouter.get('/all', blogController.getAllBlog);
+	   app.get('/all', blogController.getAllBlog);
        /**
 	 * @api {get} /api/v1/blogs/all Get all blogs
 	 * @apiVersion 0.0.1
@@ -55,7 +56,8 @@ const blogRouter = express.Router();
 	   }
 	 */
       // app.get(baseUrl+'/view/:blogId',auth.isAuthenticated,example.exampleMiddleware,blogController.viewByBlogId);
-	   blogRouter.get('/view/:blogId',example.exampleMiddleware,blogController.viewByBlogId);
+	  // blogRouter.get('/view/:blogId',example.exampleMiddleware,blogController.viewByBlogId);
+	   app.get('/view/:blogId',example.exampleMiddleware,blogController.viewByBlogId);
        /**
 	 * @api {get} /api/v1/blogs/view/:blogId Get a single blog
 	 * @apiVersion 0.0.1
@@ -180,7 +182,8 @@ const blogRouter = express.Router();
 	    "data": null
 	   }
 	 */
-      blogRouter.post('/:blogId/delete',blogController.deleteBlog);
+	// blogRouter.post('/:blogId/delete',blogController.deleteBlog);
+	  app.post('/:blogId/delete',blogController.deleteBlog);
 
       /**
 	 * @api {post} /api/v1/blogs/:blogId/delete Delete blog by blogId
@@ -208,7 +211,8 @@ const blogRouter = express.Router();
 	    "data": null
 	   }
 	 */
-      blogRouter.put('/:blogId/edit',blogController.editBlog); 
+     // blogRouter.put('/:blogId/edit',blogController.editBlog); 
+	  app.put('/:blogId/edit',blogController.editBlog); 
 
       /**
 	 * @api {put} /api/v1/blogs/:blogId/edit Edit blog by blogId
@@ -251,7 +255,8 @@ const blogRouter = express.Router();
 	   }
 	 */
 	  //app.post(baseUrl+'/create',auth.isAuthenticated,blogController.createBlog);
-	  blogRouter.post('/create',blogController.createBlog);
+	//  blogRouter.post('/create',blogController.createBlog);
+	  app.post('/create',blogController.createBlog);
 
 /**
 	 * @api {post} /api/v1/blogs/create Create blog
@@ -341,10 +346,10 @@ const blogRouter = express.Router();
 	   }
 	 */
 
-//}
+}
 
-//module.exports = {
-//setRouter: setRouter
-//}
+module.exports = {
+setRouter: setRouter
+}
 
-module.exports = blogRouter;
+//module.exports = blogRouter;
